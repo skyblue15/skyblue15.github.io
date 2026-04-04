@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #121212;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+}
+
+.nav-logo {
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: #bbbbbb;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  color: #4caf50;
+  outline: none;
+}
+
+/* Hero section */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+.parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://uploads.onecompiler.io/44jb4d2kt/44jb77mqy/WhatsApp%20Image%202026-04-04%20at%2009.27.36.jpeg');
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  z-index: -2;
+  filter: brightness(0.6);
+  transition: transform 0.3s ease-out;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 18, 18, 0.7);
+  z-index: -1;
+}
+
+.hero-text {
+  color: #fff;
+  max-width: 700px;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  letter-spacing: 1.5px;
+}
+
+.hero-text p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  color: #cccccc;
+}
+
+/* Button */
+.btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 40px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #388e3c;
+  outline: none;
+}
+
+/* About section */
+.about {
+  max-width: 900px;
+  margin: 100px auto 60px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  color: #fff;
+}
+
+.about p {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #bbb;
+}
+
+/* Flags section */
+.flags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.flag {
+  background-color: #1e1e1e;
+  border-radius: 15px;
+  padding: 25px 30px;
+  width: 280px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+.flag:hover,
+.flag:focus-within {
+  transform: translateY(-6px);
+}
+
+.flag h3 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.flag p {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* Color variations */
+.flag.green {
+  border-left: 5px solid #4caf50;
+}
+
+.flag.red {
+  border-left: 5px solid #e53935;
+}
+
+/* Other sections placeholder styling */
+.achievements, .work, .contact {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 20px;
+  color: #ccc;
+  text-align: center;
+}
+
+.achievements h2, .work h2, .contact h2 {
+  margin-bottom: 25px;
+  color: #fff;
+  font-size: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+  .nav-links {
+    gap: 18px;
+  }
+
+  .hero-text h1 {
+    font-size: 2.4rem;
+  }
+  
+  .flags {
+    flex-direction: column;
+    align-items: center;
+  }
+}
