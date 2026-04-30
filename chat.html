@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Message Wall — Bintang Fahreza</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .chat-wrapper {
+      max-width: 700px;
+      margin: 120px auto 60px;
+      padding: 0 20px;
+    }
+    .chat-wrapper h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .chat-subtitle {
+      text-align: center;
+      color: #888;
+      margin-bottom: 40px;
+    }
+    .chat-box {
+      background: #1e1e1e;
+      border-radius: 15px;
+      padding: 20px;
+      height: 400px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .message {
+      background: #2a2a2a;
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .message .meta {
+      font-size: 0.75rem;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    .message .text {
+      color: #e0e0e0;
+      font-size: 0.95rem;
+    }
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 12px 20px;
+      border-radius: 30px;
+      border: none;
+      background: #1e1e1e;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+    }
+    .chat-input button {
+      padding: 12px 25px;
+      border-radius: 30px;
+      border: none;
+      background: #4caf50;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .chat-input button:hover {
+      background: #388e3c;
+    }
+    .cooldown-msg {
+      text-align: center;
+      color: #e53935;
+      font-size: 0.85rem;
+      margin-top: 8px;
+      min-height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a href="index.html" class="nav-logo">Bintang Fahreza</a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Message Wall</a></li>
+        <li><a href="achievements.html">Achievements</a></li>
+        <li><a href="downloads.html">Downloads</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="chat-wrapper">
+    <h2>💬 Message Wall</h2>
+    <p class="chat-subtitle">Leave an anonymous message. Be nice... or don't. Just don't spam 💀</p>
+    <div class="chat-box" id="chatBox"></div>
+    <div class="chat-input">
+      <input type="text" id="msgInput" placeholder="Type something..." maxlength="200"/>
+      <button onclick="sendMessage()">Send</button>
+    </div>
+    <p class="cooldown-msg" id="cooldownMsg"></p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue, query, limitToLast } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCYNXQ_F4E1-Bg2B8m9V8FCHnK_7rU-SuY",
+      authDomain: "my-website-i-guess.firebaseapp.com",
+      databaseURL: "https://my-website-i-guess-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "my-website-i-guess",
+      storageBucket: "my-website-i-guess.firebasestorage.app",
+      messagingSenderId: "566140661651",
+      appId: "1:566140661651:web:5344ac0dc85c5112cd8266"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const BAD_WORDS = ["bajingan", "bangsat", "kontol", "memek", "anjing", "bitch", "fuck", "shit", "ass"];
+
+    function containsBadWord(text) {
+      return BAD_WORDS.some(word => text.toLowerCase().includes(word));
+    }
+
+    const messagesRef = query(ref(db, "messages"), limitToLast(50));
+    onValue(messagesRef, (snapshot) => {
+      const chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML = "";
+      snapshot.forEach((child) => {
+        const data = child.val();
+        const div = document.createElement("div");
+        div.className = "message";
+        div.innerHTML = `
+          <div class="meta">Anonymous • ${data.time}</div>
+          <div class="text">${data.text}</div>
+        `;
+        chatBox.appendChild(div);
+      });
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+    window.sendMessage = function() {
+      const input = document.getElementById("msgInput");
+      const cooldownMsg = document.getElementById("cooldownMsg");
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      if (containsBadWord(text)) {
+        cooldownMsg.textContent = "⚠️ Your message contains blocked words!";
+        setTimeout(() => cooldownMsg.textContent = "", 3000);
+        return;
+      }
+
+      const lastSent = localStorage.getItem("lastSent");
+      const now = Date.now();
+      if (lastSent && now - lastSent < 60000) {
+        const wait = Math.ceil((60000 - (now - lastSent)) / 1000);
+        cooldownMsg.textContent = `⏳ Wait ${wait} seconds before sending again!`;
+        setTimeout(() => cooldownMsg.textContent = "", 3000);
+        return;
+      }
+
+      const time = new Date().toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" });
+      push(ref(db, "messages"), { text, time });
+      localStorage.setItem("lastSent", now);
+      input.value = "";
+    }
+
+    document.getElementById("msgInput").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") window.sendMessage();
+    });
+  </script>
+</body>
+</html>
