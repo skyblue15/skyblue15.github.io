@@ -128,3 +128,17 @@ document.addEventListener('keydown', e => {
   }
   draw();
 });
+
+window.moveLeft = function() {
+  if (!collides(piece.x - 1, piece.y, piece.shape)) { piece.x--; draw(); }
+}
+window.moveRight = function() {
+  if (!collides(piece.x + 1, piece.y, piece.shape)) { piece.x++; draw(); }
+}
+window.moveDown = function() {
+  if (!collides(piece.x, piece.y + 1, piece.shape)) { piece.y++; draw(); }
+}
+window.rotatePiece = function() {
+  const rotated = rotate(piece.shape);
+  if (!collides(piece.x, piece.y, rotated)) { piece.shape = rotated; draw(); }
+}
