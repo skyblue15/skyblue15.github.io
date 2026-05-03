@@ -269,3 +269,102 @@ h1, h2, h3 {
   font-size: 1rem;
   line-height: 1.7;
 }
+
+.downloads-wrapper {
+  max-width: 900px;
+  margin: 120px auto 60px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.downloads-wrapper h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.download-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.legend-item {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.legend-item.app { background: #1a3d1a; color: #4caf50; }
+.legend-item.novel { background: #1a2a3d; color: #42a5f5; }
+.legend-item.art { background: #3d3400; color: #fdd835; }
+.legend-item.music { background: #2d1a3d; color: #ab47bc; }
+
+.download-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.download-card {
+  background: #1e1e1e;
+  border-radius: 15px;
+  padding: 25px;
+  width: 260px;
+  text-align: left;
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.download-card:hover {
+  transform: translateY(-6px);
+}
+
+.download-card.app { border-top: 4px solid #4caf50; }
+.download-card.novel { border-top: 4px solid #42a5f5; }
+.download-card.art { border-top: 4px solid #fdd835; }
+.download-card.music { border-top: 4px solid #ab47bc; }
+
+.download-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.download-card.app .download-tag { color: #4caf50; }
+.download-card.novel .download-tag { color: #42a5f5; }
+.download-card.art .download-tag { color: #fdd835; }
+.download-card.music .download-tag { color: #ab47bc; }
+
+.download-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.download-card p {
+  color: #aaa;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.download-btn {
+  background: #2a2a2a;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.3s;
+  display: inline-block;
+}
+
+.download-btn:hover {
+  background: #3a3a3a;
+}
