@@ -179,6 +179,16 @@
     });
   </script>
 
+  <div class="tetris-wrapper">
+  <h2>🎮 Bored? Play Tetris</h2>
+  <p class="subtitle">while you're here anyway</p>
+  <canvas id="tetris" width="240" height="400"></canvas>
+  <div class="tetris-controls">
+    <p>⬅️ ➡️ Move &nbsp;|&nbsp; ⬆️ Rotate &nbsp;|&nbsp; ⬇️ Speed up</p>
+    <button id="startBtn" onclick="startTetris()">Start</button>
+    <p class="tetris-score">Score: <span id="score">0</span></p>
+  </div>
+</div>
  <div class="tetris-mobile-controls">
   <div class="tetris-row">
     <button onclick="rotatePiece()">⬆️</button>
