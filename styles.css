@@ -368,3 +368,51 @@ h1, h2, h3 {
 .download-btn:hover {
   background: #3a3a3a;
 }
+
+.tetris-wrapper {
+  max-width: 400px;
+  margin: 60px auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.tetris-wrapper h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+#tetris {
+  background: #1e1e1e;
+  border-radius: 10px;
+  display: block;
+  margin: 20px auto;
+  border: 2px solid #333;
+}
+
+.tetris-controls p {
+  color: #888;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+}
+
+.tetris-score {
+  margin-top: 10px !important;
+  font-size: 1rem !important;
+  color: #fff !important;
+}
+
+#startBtn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#startBtn:hover {
+  background: #388e3c;
+}
